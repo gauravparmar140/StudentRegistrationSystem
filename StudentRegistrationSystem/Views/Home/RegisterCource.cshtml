@@ -1,0 +1,54 @@
+﻿@model List<StudentRegistrationSystem.Models.Cource>
+
+@{
+    ViewBag.Title = "RegisterCou    rce";
+    Layout = "~/Views/Shared/_Layout_LoggedIn.cshtml";
+}
+@Styles.Render("~/Content/css")
+
+@Styles.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jqueryui")
+
+
+<!-- for pop message start here -->
+@Scripts.Render("~/Content/POPUPCSS")
+@Styles.Render("~/bundles/POPUPJS")
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal.css">
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal-default-theme.css">
+<script src="~/Content/RemodalPopup/dist/remodal.min.js"></script>
+<script src="~/Content/RemodalPopup/dist/remodal.js"></script>
+<div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="confirm" class="remodal-close"></button>
+    <h1>Success</h1>
+    <p id="message"></p>
+    <br>
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
+
+
+@if (TempData["Success"] != null)
+{
+    <script type="text/javascript">
+    document.getElementById("message").innerHTML = "Added Successfully";
+    var options = { };
+    $('[data-remodal-id=modal]').remodal(options).open();
+    </script>
+}
+<!-- ends here-->
+@using (Html.BeginForm("RegisterCource","Home",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    <div>Register Cources</div>
+    <div>
+        @foreach (var cource in Model)
+        {
+            <input type="checkbox" name="chkCource"  value="@cource.Id" />@cource.CourceName
+        }
+
+    </div>
+    <input type="submit" value="Register Cource" class="btn btn-default"/>
+    
+}
+
+

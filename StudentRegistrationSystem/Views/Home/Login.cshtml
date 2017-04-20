@@ -1,0 +1,90 @@
+﻿@model StudentRegistrationSystem.Models.T_Student
+
+@{
+    Layout = "~/Views/Shared/_Layout_MainSite.cshtml";
+}
+<!-- for pop message start here -->
+@Scripts.Render("~/Content/POPUPCSS")
+@Styles.Render("~/bundles/POPUPJS")
+@Scripts.Render("~//bundles/jqueryui")
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal.css">
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal-default-theme.css">
+<script src="~/Content/RemodalPopup/dist/remodal.min.js"></script>
+<script src="~/Content/RemodalPopup/dist/remodal.js"></script>
+<div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="confirm" class="remodal-close"></button>
+    <h1>Message</h1>
+    <p id="message"></p>
+    <br>
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
+
+
+@if (TempData["Success"] != null)
+{
+    <script type="text/javascript">
+        document.getElementById("message").innerText =" @TempData["Success"].ToString() "
+    var options = { };
+    $('[data-remodal-id=modal]').remodal(options).open();
+    </script>
+}
+ 
+<h2>Login</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <hr />
+ 
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new {@id="txtUserName", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                <span id="validatetxtUserName"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new {@id="txtPassword", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <span id="validatetxtPassword"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-success" onclick="return ValidateDetails()" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+   
+    function ValidateDetails() {
+        var error = true;
+
+        if (document.getElementById("txtUserName").value == "") {
+            document.getElementById("validatetxtUserName").innerHTML = "Enter UserName ";
+            error = false;
+        }
+
+        if (document.getElementById("txtPassword").value == "") {
+            document.getElementById("validatetxtPassword").innerHTML = "Enter Password";
+            error = false;
+        }
+
+        return error;
+    }
+</script>

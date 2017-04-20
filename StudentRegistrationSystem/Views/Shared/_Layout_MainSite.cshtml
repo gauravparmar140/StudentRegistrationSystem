@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Student Registration System</title>
+    @Styles.Render("~/Content/css")
+    
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jquery")
+    
+    
+<style type="text/css">
+    .center {
+        text-align:center;
+        align-content:center;
+        width:30%;
+    }
+</style> 
+
+</head>
+<body style="background-image:url(../../Image/background-city.png);background-repeat:no-repeat;
+    background-size:contain;height:800px
+">
+    <center>
+        <img src="~/Image/LogoSystem.png" style="opacity:1"/>
+    </center>
+    <div class="btn-group btn-group-justified" role="group" style="width:500px;align-content:center;margin-left:600px;height:50px">
+
+        <div class="row" style="align-content:center; width:20%;display:inline-block;font-size:large">
+            @Html.ActionLink("Home", "Index", "Home")
+        </div>
+        <div class="row" style="align-content:center; width:30%;display:inline-block;font-size:large">
+            @Html.ActionLink("Registration", "Registration", "Home")
+        </div>
+        <div class="row" style="align-content:center;width:30%;display:inline-block;font-size:large">
+            @Html.ActionLink("Login", "Login", "Home")
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+</body>
+</html>

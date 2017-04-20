@@ -1,0 +1,25 @@
+﻿@model List<StudentRegistrationSystem.ViewModel.CourceRegistrationViewModel>
+
+@{
+    ViewBag.Title = "RegisteredCource";
+    Layout = "~/Views/Shared/_Layout_LoggedIn.cshtml";
+}
+
+<h2>RegisteredCource</h2>
+
+<table>
+    
+
+    @foreach (var data in Model)
+    {
+        <tr>
+            <td>
+                Cource : @data.CourceName
+            </td>
+            <td>
+                Student : @data.StudentName
+            </td>
+        </tr>
+    }
+</table>
+

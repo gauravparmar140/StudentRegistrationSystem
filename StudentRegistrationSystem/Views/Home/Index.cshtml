@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_MainSite.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    @if (TempData["notice"] != null)
+    {
+    <p>@TempData["notice"]</p>
+    }
+
+</div>
+

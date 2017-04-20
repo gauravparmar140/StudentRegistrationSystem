@@ -1,0 +1,45 @@
+﻿@model IEnumerable<StudentRegistrationSystem.Models.Cource>
+
+@{
+    ViewBag.Title = "ViewCource";
+    Layout = "~/Views/Shared/_Layout_LoggedIn.cshtml";
+}
+
+<h2>ViewCource</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddCource")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourceDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourceDescription)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "EditCource", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteCource", new { id=item.Id })
+
+
+        </td>
+    </tr>
+}
+
+</table>

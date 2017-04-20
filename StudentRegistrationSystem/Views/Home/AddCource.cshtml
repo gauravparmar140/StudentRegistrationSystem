@@ -1,0 +1,102 @@
+﻿@model StudentRegistrationSystem.Models.Cource
+@{
+    ViewBag.Title = "AddCource";
+    Layout = "~/Views/Shared/_Layout_LoggedIn.cshtml";
+}
+@Styles.Render("~/Content/css")
+
+@Styles.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jqueryui")
+
+
+<!-- for pop message start here -->
+@Scripts.Render("~/Content/POPUPCSS")
+@Styles.Render("~/bundles/POPUPJS")
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal.css">
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal-default-theme.css">
+<script src="~/Content/RemodalPopup/dist/remodal.min.js"></script>
+<script src="~/Content/RemodalPopup/dist/remodal.js"></script>
+<div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="confirm" class="remodal-close"></button>
+    <h1>Success</h1>
+    <p id="message"></p>
+    <br>
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
+
+
+@if (TempData["Success"] != null)
+{
+    <script type="text/javascript">
+    document.getElementById("message").innerHTML = "Added Successfully";
+    var options = { };
+    $('[data-remodal-id=modal]').remodal(options).open();
+    </script>
+}
+<!-- ends here-->
+<h2>AddCource</h2>
+
+@using (Html.BeginForm("AddCource","Home",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourceName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CourceName, new { htmlAttributes = new {@id="txtCourceName", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.CourceName, "", new { @class = "text-danger" })
+                <span id="validatetxtCourceName"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourceDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CourceDescription, new { htmlAttributes = new { @id="txtCourceDescription",@class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.CourceDescription, "", new { @class = "text-danger" })
+                <span id="validatetxtCourceDescription"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Select Role" , htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var role in ViewBag.Roles)
+                {
+                    <input type='checkbox' name='selectedRole' value="@role.Id"/>@role.RoleName
+                }
+                
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-success" onclick="return ValidateDetails()" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    function ValidateDetails() {
+        var error = true;
+
+        if (document.getElementById("txtUserName").value == "") {
+            document.getElementById("validatetxtUserName").innerHTML = "Enter UserName ";
+            error = false;
+        }
+
+        if (document.getElementById("txtPassword").value == "") {
+            document.getElementById("validatetxtPassword").innerHTML = "Enter Password";
+            error = false;
+        }
+
+        return error;
+    }
+</script>

@@ -1,0 +1,198 @@
+﻿@model StudentRegistrationSystem.Models.T_Student 
+@{
+    
+
+Layout = "~/Views/Shared/_Layout_MainSite.cshtml";
+}@Styles.Render("~/Content/css")
+
+@Styles.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jqueryui")
+
+
+<!-- for pop message start here -->
+@Scripts.Render("~/Content/POPUPCSS")
+@Styles.Render("~/bundles/POPUPJS")
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal.css">
+<link rel="stylesheet" href="~/Content/RemodalPopup/dist/remodal-default-theme.css">
+<script src="~/Content/RemodalPopup/dist/remodal.min.js"></script>
+<script src="~/Content/RemodalPopup/dist/remodal.js"></script>
+<div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="confirm" class="remodal-close"></button>
+    <h1>Success</h1>
+    <p id="message"></p>
+    <br>
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
+
+
+@if (TempData["Success"] != null)
+{
+    <script type="text/javascript">
+    document.getElementById("message").innerHTML = "Added Successfully";
+    var options = { };
+    $('[data-remodal-id=modal]').remodal(options).open();
+    </script>
+}
+<!-- ends here-->
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtBirthday').datepicker({
+            dateFormat: "dd/M/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        });
+    });
+
+
+</script>
+
+<div class="container">
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Student</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @id = "txtFirstName", @class = "form-control",style= "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger;" })
+                <span id="validatetxtFirstName"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @id = "txtLastName", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                <span id="validatetxtLastName"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @id = "txtUserName", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new {@class = "text-danger" })
+                <span id="validatetxtUserName"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password ,htmlAttributes :new { @id = "txtPassword", @class = "form-control", style = "background-color:#F0FFFF" } )
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <span id="validatetxtPassword"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @id = "txtEmailId", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                <span id="validatetxtEmailId"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @id = "txtPhoneNo", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.PhoneNo, "", new {@class = "text-danger" })
+                <span id="validatetxtPhoneNo"></span>
+            </div>
+        </div>
+        
+       <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @id = "txtAddress", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                <span id="validatetxtAddress"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{var numList = Enum.GetValues(typeof(StudentRegistrationSystem.Models.Genders));}
+                @foreach (object radiotext in numList)
+                {
+                    @Html.RadioButton("radioname", radiotext.ToString())@radiotext.ToString()
+                } 
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" >
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @id = "dtBirthday", @class = "form-control", style = "background-color:#F0FFFF" } })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                <span id="validatedtBirthday"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register" onclick="return ValidateDetails()" class="btn btn-success" id="btnRegister" />
+            </div>
+        </div>
+    </div>
+    }
+
+</div>
+<script type="text/javascript">
+    function ValidateDetails() {
+        var error = true;
+        
+        if (document.getElementById("txtFirstName").value == "") {
+            document.getElementById("validatetxtFirstName").innerHTML = "Enter FirstName";
+            error = false;
+        }
+        
+        if (document.getElementById("txtLastName").value == "") {
+            document.getElementById("validatetxtLastName").innerHTML = "Enter LastName";
+            error = false;
+        }
+        if (document.getElementById("txtUserName").value == "") {
+            document.getElementById("validatetxtUserName").innerHTML = "Enter UserName";
+            error = false;
+        }
+        if (document.getElementById("txtPassword").value == "") {
+            document.getElementById("validatetxtPassword").innerHTML = "Enter Password";
+            error = false;
+        }
+        if (document.getElementById("txtEmailId").value == "") {
+            document.getElementById("validatetxtEmailId").innerHTML = "Enter EmailId";
+            error = false;
+        }
+        if (document.getElementById("txtPhoneNo").value == "") {
+            document.getElementById("validatetxtPhoneNo").innerHTML = "Enter PhoneNo";
+            error = false;
+        }
+        if (document.getElementById("txtAddress").value == "") {
+            document.getElementById("validatetxtAddress").innerHTML = "Enter Address";
+            error = false;
+        }
+        if (document.getElementById("dtBirthday").value == "") {
+            document.getElementById("validatedtBirthday").innerHTML = "Enter Birthday";
+            error = false;
+        }
+        
+        return error;
+
+    }
+</script>
+   
+

@@ -1,0 +1,36 @@
+﻿<link rel="stylesheet" href="Content/RemodalPopup/dist/remodal.css">
+<link rel="stylesheet" href="Content/RemodalPopup/dist/remodal-default-theme.css">
+<script src="Scripts/jquery-1.12.4.js"></script>
+<script src="Scripts/jquery-1.12.4.min.js"></script>
+<script src="Content/RemodalPopup/dist/remodal.min.js"></script>
+<script src="Content/RemodalPopup/dist/remodal.js"></script>
+
+<script>
+    window.REMODAL_GLOBALS = {
+        NAMESPACE: 'modal',
+        DEFAULTS: {
+            hashTracking: false
+        }
+    };
+</script>
+
+
+
+<div class="remodal-bg">
+    <a href="#modal">Call the modal with data-remodal-id="modal"</a>
+
+    <a data-remodal-target="modal">Call the modal with data-remodal-id="modal"</a>
+</div>
+
+<div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <h1>Remodal</h1>
+    <p>
+        Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
+    </p>
+    <br>
+    <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
+
+
